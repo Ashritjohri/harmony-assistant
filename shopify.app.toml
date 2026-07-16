@@ -2,7 +2,7 @@
 
 client_id = "f63ea607d9951f6d5ca7cf53e1e23237"
 name = "harmony assistant"
-application_url = "https://example.com"
+application_url = "https://harmony-assistant-962952534311.us-central1.run.app"
 handle = "harmony-agent"
 embedded = true
 
@@ -20,4 +20,4 @@ dev_store_url = "harmony-test-n4wwjuot.myshopify.com"
 automatically_update_urls_on_dev = true
 
 [auth]
-redirect_urls = [ ]
+redirect_urls = [ "https://harmony-assistant-962952534311.us-central1.run.app/api/auth" ]

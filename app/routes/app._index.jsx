@@ -13,7 +13,7 @@ import { TitleBar } from "@shopify/app-bridge-react";
 export default function Index() {
   return (
     <Page>
-      <TitleBar title="Shop chat agent reference app">
+      <TitleBar title="Harmony Assistant">
       </TitleBar>
       <BlockStack gap="500">
         <Layout>
