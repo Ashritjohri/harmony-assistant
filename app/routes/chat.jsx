@@ -139,7 +139,8 @@ async function handleChatSession({
 
   // Initialize MCP client
   const shopId = request.headers.get("X-Shopify-Shop-Id");
-  const shopDomain = "privatekaraokeroom.myshopify.com";//request.headers.get("Origin");
+  const shopDomain = request.headers.get("Origin");
+  console.log("shop domain", shopDomain);
   const customerMcpEndpoint = await getCustomerMcpEndpoint(shopDomain, conversationId);
   const mcpClient = new MCPClient(
     shopDomain,
