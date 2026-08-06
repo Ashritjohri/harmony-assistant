@@ -36,7 +36,7 @@ class MCPClient {
    */
   async connectToCustomerServer() {
     try {
-      console.log(`Connecting to MCP server at ${this.customerMcpEndpoint}`);
+      console.log(`Connecting to customer  MCP server at ${this.customerMcpEndpoint}`);
 
       if (this.conversationId) {
         const dbToken = await getCustomerToken(this.conversationId);
@@ -71,7 +71,7 @@ class MCPClient {
 
       return customerTools;
     } catch (e) {
-      console.error("Failed to connect to MCP server: ", e);
+      console.error("Failed to connect to customer MCP server: ", e);
       throw e;
     }
   }
@@ -84,7 +84,7 @@ class MCPClient {
    */
   async connectToStorefrontServer() {
     try {
-      console.log(`Connecting to MCP server at ${this.storefrontMcpEndpoint}`);
+      console.log(`Connecting to storefront MCP server at ${this.storefrontMcpEndpoint}`);
 
       const headers = {
         "Content-Type": "application/json"
@@ -106,7 +106,7 @@ class MCPClient {
 
       return storefrontTools;
     } catch (e) {
-      console.error("Failed to connect to MCP server: ", e);
+      console.error("Failed to connect to  storefront MCP server: ", e);
       throw e;
     }
   }

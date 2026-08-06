@@ -142,6 +142,7 @@ async function handleChatSession({
   const shopDomain = "https://privatekaraokeroom.myshopify.com"//request.headers.get("Origin");
   console.log("shop domain", shopDomain);
   const customerMcpEndpoint = await getCustomerMcpEndpoint(shopDomain, conversationId);
+  console.log("customerMcpEndpoint", customerMcpEndpoint);
   const mcpClient = new MCPClient(
     shopDomain,
     conversationId,
