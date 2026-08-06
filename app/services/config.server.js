@@ -11,7 +11,7 @@ export const AppConfig = {
       defaultModel: 'claude-3-5-sonnet-latest',
     },
     gemini: {
-      defaultModel: 'gemini-2.5-pro',
+      defaultModel: 'gemini-3.5-flash-lite',
     },
     maxTokens: 20000,
     defaultPromptType: 'standardAssistant',
