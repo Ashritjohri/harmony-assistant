@@ -139,7 +139,7 @@ async function handleChatSession({
 
   // Initialize MCP client
   const shopId = request.headers.get("X-Shopify-Shop-Id");
-  const shopDomain = "https://privatekaraokeroom.myshopify.com"//request.headers.get("Origin");
+  const shopDomain = request.headers.get("Origin");
   console.log("shop domain", shopDomain);
   const customerMcpEndpoint = await getCustomerMcpEndpoint(shopDomain, conversationId);
   console.log("customerMcpEndpoint", customerMcpEndpoint);
@@ -161,7 +161,7 @@ async function handleChatSession({
       storefrontMcpTools = await mcpClient.connectToStorefrontServer();
       //customerMcpTools = await mcpClient.connectToCustomerServer();
 
-      console.log(`Connected to MCP with ${storefrontMcpTools.length} tools`);
+      console.log(`Connected to  storefront MCP with ${storefrontMcpTools.length} tools`);
       console.log(`Connected to customer MCP with ${customerMcpTools.length} tools`);
     } catch (error) {
       console.warn('Failed to connect to MCP servers, continuing without tools:', error.message);
