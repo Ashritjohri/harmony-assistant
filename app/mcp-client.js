@@ -37,7 +37,7 @@ class MCPClient {
   async connectToCustomerServer() {
     try {
       console.log(`Connecting to customer  MCP server at ${this.customerMcpEndpoint}`);
-
+      console.log("customerMcpEndpoint",this.customerMcpEndpoint)
       if (this.conversationId) {
         const dbToken = await getCustomerToken(this.conversationId);
 
