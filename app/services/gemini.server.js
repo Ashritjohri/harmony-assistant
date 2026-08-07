@@ -288,57 +288,16 @@ function transformToolsForGemini(tools) {
   });
 }
 
-// Gemini accepts only a small OpenAPI subset of JSON Schema. Any other keyword
-// (e.g. `$schema`, `additionalProperties`) causes a 400 "Cannot find field".
-const UNSUPPORTED_SCHEMA_KEYS = new Set([
-  '$schema',
-  '$id',
-  '$ref',
-  '$defs',
-  'definitions',
-  'additionalProperties',
-  'additional_properties',
-  'patternProperties',
-  'const',
-  'examples',
-  'default',
-  'oneOf',
-  'allOf',
-  'not',
-  'if',
-  'then',
-  'else',
-  'exclusiveMinimum',
-  'exclusiveMaximum',
-  'multipleOf',
-  'uniqueItems',
-  'minProperties',
-  'maxProperties',
-]);
-
 function cleanParameters(params) {
   if (typeof params !== 'object' || params === null) return params;
-  if (Array.isArray(params)) return params.map(cleanParameters);
-
-  const cleanedParams = {};
+  const cleanedParams = Array.isArray(params) ? [] : {};
   for (const key in params) {
-    if (!Object.prototype.hasOwnProperty.call(params, key)) continue;
-    if (UNSUPPORTED_SCHEMA_KEYS.has(key)) continue;
-    // Gemini only supports `format` for a couple of string variants.
-    if (key === 'format' && params.type === 'string' && !['enum', 'date-time'].includes(params[key])) continue;
-
-    // Inside `properties` the keys are user-defined field names, not schema
-    // keywords, so they must be preserved verbatim.
-    if (key === 'properties' && params[key] && typeof params[key] === 'object') {
-      const cleanedProperties = {};
-      for (const propName of Object.keys(params[key])) {
-        cleanedProperties[propName] = cleanParameters(params[key][propName]);
+    if (Object.prototype.hasOwnProperty.call(params, key)) {
+      if (key === 'format' && params.type === 'string' && !['enum', 'date-time'].includes(params[key])) continue;
+      if (key !== 'additional_properties') {
+        cleanedParams[key] = cleanParameters(params[key]);
       }
-      cleanedParams[key] = cleanedProperties;
-      continue;
     }
-
-    cleanedParams[key] = cleanParameters(params[key]);
   }
   return cleanedParams;
 }
