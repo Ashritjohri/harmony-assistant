@@ -159,7 +159,7 @@ async function handleChatSession({
 
     try {
       storefrontMcpTools = await mcpClient.connectToStorefrontServer();
-      customerMcpTools = await mcpClient.connectToCustomerServer();
+      //customerMcpTools = await mcpClient.connectToCustomerServer();
 
       console.log(`Connected to  storefront MCP with ${storefrontMcpTools.length} tools`);
       console.log(`Connected to customer MCP with ${customerMcpTools.length} tools`);
