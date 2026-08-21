@@ -355,6 +355,21 @@
     align-items: center;
     justify-content: center;
     cursor: pointer;
+    transition: background-color 0.15s ease;
+  }
+
+  /* Icon swap: send arrow by default, stop square while a stream is running. */
+  .shop-ai-chat-send .shop-ai-icon-stop,
+  .shop-ai-chat-send.is-streaming .shop-ai-icon-send {
+    display: none;
+  }
+
+  .shop-ai-chat-send.is-streaming .shop-ai-icon-stop {
+    display: block;
+  }
+
+  .shop-ai-chat-send.is-streaming {
+    background-color: #22222a;
   }
 
   .shop-ai-typing-indicator {
@@ -523,9 +538,299 @@
   .shop-ai-add-to-cart:hover {
     background-color: #3f36c0;
   }
+
+  .shop-ai-status {
+  font-size: 0.85em;
+  font-style: italic;
+  opacity: 0.7;
+  padding: 6px 12px;
+  /* deliberately no bubble background — it must not look like a message */
+}
+.shop-ai-status::after {
+  content: '';
+  animation: shop-ai-dots 1.2s steps(4, end) infinite;
+}
+@keyframes shop-ai-dots {
+  0%   { content: ''; }
+  25%  { content: '.'; }
+  50%  { content: '..'; }
+  75%  { content: '...'; }
+}
   
+  /* ---------------------------------------------------------------------
+     Agent cards - venues, rooms, slots, quotes, checkout, bookings.
+     Rendered below the assistant's reply; see the Card module in chat.js.
+     --------------------------------------------------------------------- */
+
+  .shop-ai-card {
+    background: #fff;
+    border: 1px solid #eaeaea;
+    border-radius: 12px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.06);
+    padding: 12px;
+    margin: 8px 0;
+    max-width: 92%;
+    font-size: 14px;
+    color: #333;
+  }
+
+  .shop-ai-card-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: #666;
+    margin-bottom: 10px;
+  }
+
+  /* Stacked items are separated by rules rather than nested boxes, so a list
+     of five rooms doesn't read as five competing cards. */
+  .shop-ai-card-items > .shop-ai-card-item + .shop-ai-card-item {
+    border-top: 1px solid #f0f0f0;
+    margin-top: 10px;
+    padding-top: 10px;
+  }
+
+  .shop-ai-card-item-title {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: #222;
+  }
+
+  /* Short facts on one line: "Los Angeles, CA · 5-25 guests · 2 rooms" */
+  .shop-ai-card-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 8px;
+    font-size: 13px;
+    color: #666;
+  }
+
+  .shop-ai-card-meta span + span::before {
+    content: "·";
+    margin-right: 8px;
+    color: #ccc;
+  }
+
+  .shop-ai-card-note {
+    font-size: 12px;
+    color: #777;
+    margin-top: 4px;
+  }
+
+  .shop-ai-card-empty {
+    font-size: 13px;
+    color: #777;
+    padding: 4px 0;
+  }
+
+  .shop-ai-card-row {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 4px 0;
+    font-size: 13px;
+  }
+
+  .shop-ai-card-row span:first-child {
+    color: #777;
+  }
+
+  .shop-ai-card-row span:last-child {
+    text-align: right;
+    font-weight: 500;
+  }
+
+  .shop-ai-card-row.is-total {
+    border-top: 1px solid #f0f0f0;
+    margin-top: 4px;
+    padding-top: 8px;
+    font-size: 15px;
+  }
+
+  .shop-ai-card-row.is-total span:last-child {
+    font-weight: 700;
+    color: #5046e4;
+  }
+
+  .shop-ai-card-badge {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+    background: #eef0fb;
+    color: #5046e4;
+    vertical-align: middle;
+  }
+
+  .shop-ai-card-badge.is-cancelled {
+    background: #fdecec;
+    color: #c0392b;
+  }
+
+  .shop-ai-card-disclosure {
+    margin-top: 8px;
+    font-size: 12px;
+  }
+
+  .shop-ai-card-disclosure summary {
+    cursor: pointer;
+    color: #5046e4;
+  }
+
+  .shop-ai-card-disclosure p {
+    margin: 6px 0 0 0;
+    color: #666;
+    line-height: 1.4;
+  }
+
+  .shop-ai-card-expiry {
+    margin-top: 8px;
+    font-size: 12px;
+    color: #777;
+  }
+
+  .shop-ai-card-expiry.is-expired {
+    color: #c0392b;
+  }
+
+  /* --- actions --- */
+
+  .shop-ai-card-actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+  }
+
+  .shop-ai-card-btn {
+    padding: 8px 14px;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, opacity 0.2s;
+  }
+
+  .shop-ai-card-btn--primary {
+    background-color: #5046e4;
+    color: #fff;
+  }
+
+  .shop-ai-card-btn--primary:hover:not(:disabled) {
+    background-color: #3f36c0;
+  }
+
+  .shop-ai-card-btn--secondary {
+    background-color: #fff;
+    border-color: #d8d8e2;
+    color: #333;
+  }
+
+  .shop-ai-card-btn--secondary:hover:not(:disabled) {
+    border-color: #5046e4;
+    color: #5046e4;
+  }
+
+  .shop-ai-card-btn--link {
+    background: none;
+    padding: 8px 4px;
+    color: #5046e4;
+  }
+
+  .shop-ai-card-btn--link:hover:not(:disabled) {
+    text-decoration: underline;
+  }
+
+  .shop-ai-card-btn--danger {
+    background-color: #fff;
+    border-color: #e9bcbc;
+    color: #c0392b;
+  }
+
+  .shop-ai-card-btn--danger:hover:not(:disabled) {
+    background-color: #fdecec;
+  }
+
+  .shop-ai-card-btn:disabled {
+    opacity: 0.45;
+    cursor: default;
+  }
+
+  /* --- room photos --- */
+
+  .shop-ai-card-image {
+    display: block;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    object-fit: cover;
+    border-radius: 8px;
+    margin-bottom: 10px;
+    background: #f0f0f4;
+  }
+
+  /* --- chips: time slots and package options --- */
+
+  .shop-ai-card-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .shop-ai-card-chip {
+    padding: 8px 14px;
+    border-radius: 999px;
+    border: 1px solid #d8d8e2;
+    background: #fff;
+    color: #333;
+    font-size: 13px;
+    font-weight: 500;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background-color 0.2s, border-color 0.2s, color 0.2s;
+  }
+
+  .shop-ai-card-chip:hover:not(:disabled) {
+    background-color: #5046e4;
+    border-color: #5046e4;
+    color: #fff;
+  }
+
+  /* Package names are sentences, not times - give them the full width. */
+  .shop-ai-card-chip.is-wide {
+    width: 100%;
+    border-radius: 8px;
+    text-align: left;
+    line-height: 1.4;
+  }
+
   /* Responsive adjustments for small screens */
   @media (max-width: 480px) {
+    .shop-ai-card {
+      max-width: 100%;
+    }
+
+    /* Full-width targets beat a row of cramped ones on a phone. */
+    .shop-ai-card-actions {
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .shop-ai-card-btn {
+      width: 100%;
+      padding: 10px 14px;
+    }
+
+    .shop-ai-card-btn--link {
+      width: auto;
+      align-self: flex-start;
+    }
+
     .shop-ai-product-grid {
       flex-direction: column;
       padding: 5px;

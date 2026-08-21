@@ -20,10 +20,13 @@
 
     <div class="shop-ai-chat-input">
       <input type="text" placeholder="{{ 'chat.inputPlaceholder' | t }}">
-      <button class="shop-ai-chat-send">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <button class="shop-ai-chat-send" type="button" aria-label="Send message">
+        <svg class="shop-ai-icon-send" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
           <line x1="22" y1="2" x2="11" y2="13"></line>
           <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+        <svg class="shop-ai-icon-stop" xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="none">
+          <rect x="6" y="6" width="12" height="12" rx="2"></rect>
         </svg>
       </button>
     </div>
@@ -54,7 +57,7 @@
       "type": "text",
       "id": "welcome_message",
       "label": "Welcome Message",
-      "default": "👋 Hi there! How can I help you today?"
+      "default": "🎤 Hi! I can help you find a private karaoke room for your night out. Which city are you in?"
     },
     {
       "type": "select",
